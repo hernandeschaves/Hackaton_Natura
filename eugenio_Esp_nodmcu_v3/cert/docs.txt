@@ -1,0 +1,11 @@
+CLIENT ID
+bebbe0b9-37b4-47da-9bb4-3d5cbb444309
+
+MQTT INFORM
+
+{
+  "host": "logicalis-eugeniostg-iothub.azure-devices.net",
+  "port": 8883,
+  "cloudToDevice": "devices/bebbe0b9-37b4-47da-9bb4-3d5cbb444309/messages/devicebound/#",
+  "deviceToCloud": "devices/bebbe0b9-37b4-47da-9bb4-3d5cbb444309/messages/events/"
+}
