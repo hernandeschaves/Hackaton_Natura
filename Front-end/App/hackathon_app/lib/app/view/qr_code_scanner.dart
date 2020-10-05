@@ -2,13 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hackathon_app/app/services/connection.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-//void main() => runApp(MaterialApp(home: QRViewWidget()));
-
-const flashOn = 'FLASH ON';
-const flashOff = 'FLASH OFF';
-const frontCamera = 'FRONT CAMERA';
-const backCamera = 'BACK CAMERA';
-
 class QRViewWidget extends StatefulWidget {
   const QRViewWidget({
     Key key,
@@ -19,8 +12,6 @@ class QRViewWidget extends StatefulWidget {
 }
 
 class _QRViewWidgetState extends State<QRViewWidget> {
-  var flashState = flashOn;
-  var cameraState = frontCamera;
   QRViewController controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
@@ -50,12 +41,15 @@ class _QRViewWidgetState extends State<QRViewWidget> {
 
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
-    controller.scannedDataStream.listen((scanData) {
+    controller.scannedDataStream.listen((scanData) async {
       ConnectionFirebase connection = ConnectionFirebase();
       //A ideia é passar o codigo auth do cliente, assim cada cliente terá um código QR específico
-      connection.createMachine(scanData);
-      Navigator.popAndPushNamed(context, '/store');
-      //dispose();
+      connection.createMachine(scanData).then(
+            (value) => value
+                ? Navigator.popAndPushNamed(context, '/store')
+                : print('QR Code não reconhecido'),
+          );
+      //Navigator.popAndPushNamed(context, '/store');
     });
   }
 

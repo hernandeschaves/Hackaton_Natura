@@ -22,7 +22,7 @@ class ConnectionFirebase {
     }
   }
 
-  Future<void> createMachine(String id) async {
+  Future<bool> createMachine(String id) async {
     final machine = FirebaseFirestore.instance.collection("Machines");
     try {
       DocumentSnapshot res = await machine.doc(id).get();
@@ -30,9 +30,11 @@ class ConnectionFirebase {
       machineController.setId(id);
       //Seta a lista de produtos da máquina
       machineController.setProductsMap(res.data()['listProductsMachine']);
+      return true;
       //print(machineController.listProductsMachine);
     } catch (e) {
       print(e);
+      return false;
     }
   }
 
@@ -68,7 +70,6 @@ class ConnectionFirebase {
   }
 
   Future<bool> addCredito(double credito) async {
-    print('Total Mobx: ${produtoController.totalCompra}');
     double total =
         double.parse((userController.user.saldo + credito).toStringAsFixed(2));
     userController.setUserModelSaldo(total);

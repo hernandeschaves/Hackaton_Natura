@@ -1,31 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hackathon_app/app/services/connection.dart';
 
 import '../../main.dart';
 
-class AddSaldo extends StatefulWidget {
-  @override
-  _AddSaldoState createState() => _AddSaldoState();
-}
-
-class _AddSaldoState extends State<AddSaldo> {
-  bool comprando = false;
-
-  void _setLoading() {
-    setState(() {
-      comprando = !comprando;
-    });
-  }
-
+class AddSaldo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ConnectionFirebase connection = ConnectionFirebase();
     DocumentReference userStream = FirebaseFirestore.instance
         .collection('Users')
-        //.doc(userController.user.id);
-        .doc('wuiSa9uabNRj1xwmYC8xmDmomNF3');
+        .doc(userController.user.id);
     return Scaffold(
       backgroundColor: Color(0xffffbb7b),
       appBar: AppBar(
@@ -82,7 +67,7 @@ class _AddSaldoState extends State<AddSaldo> {
         ],
         centerTitle: true,
         title: Text(
-          'Comprar crédito',
+          'Add crédito',
           style: TextStyle(color: Colors.black),
         ),
         elevation: 0,

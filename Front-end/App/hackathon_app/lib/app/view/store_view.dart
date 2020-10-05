@@ -10,7 +10,7 @@ class Store extends StatefulWidget {
 }
 
 class _StoreState extends State<Store> {
-  List<String> listImages = [
+  List<String> carouselImages = [
     'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.sh9rc3XCoDp4_YNgN12IzQHaD3%26pid%3DApi&f=1',
     'https://s-media-cache-ak0.pinimg.com/736x/07/11/38/071138326a4718464d97f4fca16b5d14.jpg',
     'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ZoqixSF1Fucmmimn3P4dIQHaEf%26pid%3DApi&f=1',
@@ -58,6 +58,8 @@ class _StoreState extends State<Store> {
                         return Text("Loading");
                       }
                       print(snapshot.data.data()['saldo']);
+                      userController.setUserModelSaldo(
+                          (snapshot.data.data()['saldo']).toDouble());
                       return Text(
                         'R\$ ${snapshot.data.data()['saldo'].toStringAsFixed(2)}',
                         style: TextStyle(
@@ -88,10 +90,7 @@ class _StoreState extends State<Store> {
       backgroundColor: Color(0xffffbb7b),
       //Responsável pelo scroll da página
       body: SingleChildScrollView(
-        //physics: ScrollPhysics(),
         child: Column(
-          //mainAxisAlignment: MainAxisAlignment.center,
-          //crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             CarouselSlider(
               options: CarouselOptions(
@@ -99,7 +98,7 @@ class _StoreState extends State<Store> {
                 autoPlay: true,
                 autoPlayCurve: Curves.fastOutSlowIn,
               ),
-              items: listImages.map(
+              items: carouselImages.map(
                 (i) {
                   return Builder(
                     builder: (BuildContext context) {
@@ -142,11 +141,9 @@ class _StoreState extends State<Store> {
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: machineController.listProductsMachine.length,
-              //length,
               itemBuilder: (BuildContext context, int index) {
                 String nome =
                     machineController.listProductsMachine[index]['nome'];
-                /* print(machineController.listProductsMachine[0]['name']); */
                 String preco = machineController.listProductsMachine[index]
                         ['price']
                     .toStringAsFixed(2);
@@ -154,6 +151,8 @@ class _StoreState extends State<Store> {
                     machineController.listProductsMachine[index]['descricao'];
                 int quantidade =
                     machineController.listProductsMachine[index]['quantidade'];
+                String urlImage =
+                    machineController.listProductsMachine[index]['urlImage'];
                 return Padding(
                   padding: EdgeInsets.only(
                     left: 20,
@@ -168,12 +167,11 @@ class _StoreState extends State<Store> {
                         id: index,
                         name: nome,
                         descricao: descricao,
+                        urlImage: urlImage,
                         preco: double.parse(preco),
                         quantidade: quantidade,
                       ));
                       Navigator.pushNamed(context, '/payment');
-                      /* print(
-                          machineController.listProductsMachine[index]['nome']); */
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -196,8 +194,7 @@ class _StoreState extends State<Store> {
                               ),
                               image: DecorationImage(
                                 image: NetworkImage(
-                                  //produtos[index],
-                                  'https://static.natura.com/sites/default/files/styles/product_image_zoom/public/products/69124_1_4.jpg?itok=X2xr3N8u',
+                                  urlImage,
                                 ),
                                 fit: BoxFit.scaleDown,
                               ),

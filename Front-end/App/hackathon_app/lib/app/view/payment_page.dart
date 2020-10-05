@@ -88,8 +88,6 @@ class _PaymentPageState extends State<PaymentPage> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          //mainAxisAlignment: MainAxisAlignment.center,
-          //crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               margin: EdgeInsets.all(5),
@@ -102,8 +100,7 @@ class _PaymentPageState extends State<PaymentPage> {
                 ),
                 image: DecorationImage(
                   image: NetworkImage(
-                    //produtos[index],
-                    'https://static.natura.com/sites/default/files/styles/product_image_zoom/public/products/69124_1_4.jpg?itok=X2xr3N8u',
+                    produtoController.produto.urlImage,
                   ),
                   fit: BoxFit.scaleDown,
                 ),
@@ -207,50 +204,22 @@ class _PaymentPageState extends State<PaymentPage> {
                 _setLoading();
                 //Realizar Pagamento
                 print("Realizar compra");
-                /* double total = double.parse((userController.user.saldo -
-                        (produtoController.produto.preco *
-                            produtoController.quantidadeCliente))
-                    .toString());
-                print('Total: $total'); */
-                /* connection.realizarCompra(total).then((value) {
-                  if (value) {
-                    _setLoading();
-                    print('Compra realizada com sucesso!');
-                  } else {
-                    _setLoading();
-                    print("Compra não realizada!");
-                  }
-                }); */
                 connection.realizarCompra().then((value) {
                   if (value) {
                     _setLoading();
                     print('Compra realizada com sucesso!');
+                    //Solicitar Produto a máquina
                   } else {
                     _setLoading();
                     print("Compra não realizada!");
                   }
                 });
-                //Solicitar Produto a máquina
               } else {
                 print('Estoque insuficiente');
               }
             } else {
               print("Saldo insuficiente");
             }
-
-            /* _auth.loginWithEmail().then(
-                      (val) => {
-                        _setLoading(),
-                        if (val == true)
-                          {
-                            Navigator.pushNamed(context, '/home'),
-                          }
-                        else
-                          {
-                            print(val.toString()),
-                          },
-                      },
-                    ); */
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
