@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "270804985612",
+    "firebase_url": "https://app-hackathon-natura.firebaseio.com",
+    "project_id": "app-hackathon-natura",
+    "storage_bucket": "app-hackathon-natura.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270804985612:android:2f365239c3eeb8ccc44b29",
+        "android_client_info": {
+          "package_name": "com.example.hackathon_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270804985612-t37d21c6qgpvbqvru846d3m9duuhbab5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdpFlacQqOI7Zy-2Iv-3PdBDbeBvIVjYs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270804985612-t37d21c6qgpvbqvru846d3m9duuhbab5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
