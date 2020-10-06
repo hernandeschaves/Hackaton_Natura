@@ -57,9 +57,9 @@ class _StoreState extends State<Store> {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Text("Loading");
                       }
-                      print(snapshot.data.data()['saldo']);
+                      //print(snapshot.data.data()['saldo']);
                       userController.setUserModelSaldo(
-                          (snapshot.data.data()['saldo']).toDouble());
+                          (snapshot.data.data()['saldo'])?.toDouble());
                       return Text(
                         'R\$ ${snapshot.data.data()['saldo'].toStringAsFixed(2)}',
                         style: TextStyle(

@@ -1,14 +1,16 @@
+import 'package:hackathon_app/main.dart';
 import 'package:http/http.dart';
 
 class EugenioConnetion {
-  final email = "renansa27@gmail.com";
-  final password = "ConexaoEugenio27";
-  Future<Response> connetcion() async {
-    var url = "https://portal.stg.eugenio.io/api/v1/auth";
+  Future<Response> testeOseias() async {
+    var deviceId = "10d21a8e-1a08-4fc0-b5ad-4bd1c9a79f13";
+    var url = "https://portal.stg.eugenio.io/api/v1/things/$deviceId/invoke";
     Map<String, String> headers = {
+      'apikey': "oO6yJhcsnK4YpVSQUO4sU2PYrkn3aThW",
       "Content-Type": "application/json",
     };
-    String json = '{"email":"$email", "password":"$password"}';
+    String json =
+        '{ "method": "qrcode_app", "payload": "${userController.user.id}", "timeout": 10 }';
 
     Response response = await post(
       url,

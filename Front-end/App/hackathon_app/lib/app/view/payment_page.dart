@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:hackathon_app/app/services/connection.dart';
+import 'package:hackathon_app/app/services/eugenio_connection.dart';
 import 'package:hackathon_app/main.dart';
 
 class PaymentPage extends StatefulWidget {
@@ -204,6 +205,17 @@ class _PaymentPageState extends State<PaymentPage> {
                 _setLoading();
                 //Realizar Pagamento
                 print("Realizar compra");
+                //Mandando dados do qrCode para a máquina via Eugênio.
+                print('Enviando dados para o Eugênio');
+                EugenioConnetion eugenioConnetion = EugenioConnetion();
+                eugenioConnetion.testeOseias().then((value) {
+                  if (value.statusCode == 200) {
+                    print('Dado enviado com sucesso');
+                  } else {
+                    print('Houve um problema ao tentar enviar dados');
+                  }
+                });
+                //Registrando compra no Firebase
                 connection.realizarCompra().then((value) {
                   if (value) {
                     _setLoading();
